@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Report from "./routes/report.jsx";
+import Report from "./routes/Report.jsx";
+import ThankYou from "./routes/ThankYou.jsx";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "raporter",
     element: <Report />,
+  },
+  {
+    path: "takk",
+    element: <ThankYou />,
   },
 ]);
 
