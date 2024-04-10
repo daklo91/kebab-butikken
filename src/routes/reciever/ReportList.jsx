@@ -8,6 +8,7 @@ async function fetchDataFromFirestore() {
   const querySnapshot = await getDocs(ref);
 
   const data = [];
+  console.log(querySnapshot);
   querySnapshot.forEach((doc) => {
     data.push({ id: doc.id, ...doc.data() });
   });
@@ -47,9 +48,7 @@ function ReportList() {
             reportList.map((report) => (
               <tr key={report.id}>
                 <td>
-                  <Link to={"/raport/" + report.id} state={{ ...report }}>
-                    {report.title}
-                  </Link>
+                  <Link to={"/raport/" + report.id}>{report.title}</Link>
                 </td>
                 <td>{report.email}</td>
                 <td>{report.date}</td>
