@@ -3,8 +3,9 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Report from "./routes/Report.jsx";
-import ThankYou from "./routes/ThankYou.jsx";
+import Report from "./routes/sender/Report.jsx";
+import ThankYou from "./routes/sender/ThankYou.jsx";
+import ReportList from "./routes/reciever/ReportList.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "takk",
     element: <ThankYou />,
+  },
+  {
+    path: "raport-liste",
+    element: <ReportList />,
   },
 ]);
 

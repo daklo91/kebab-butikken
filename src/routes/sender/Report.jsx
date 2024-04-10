@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "@firebase/firestore";
-import { firestore } from "../firebase_setup/firebase";
+import { firestore } from "../../firebase_setup/firebase";
 
 function Report() {
   const [error, setError] = useState(false);
