@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Report from "./routes/sender/Report.jsx";
 import ThankYou from "./routes/sender/ThankYou.jsx";
 import ReportList from "./routes/reciever/ReportList.jsx";
+import ReportOverview from "./routes/reciever/ReportOverview.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "raport-liste",
     element: <ReportList />,
+  },
+  {
+    path: "raport/:reportID",
+    element: <ReportOverview />,
   },
 ]);
 

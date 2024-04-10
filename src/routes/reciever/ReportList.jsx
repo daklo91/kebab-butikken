@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getDocs, collection } from "@firebase/firestore";
 import { firestore } from "../../firebase_setup/firebase";
+import { Link } from "react-router-dom";
 
 async function fetchDataFromFirestore() {
   const ref = collection(firestore, "reports");
@@ -37,11 +38,19 @@ function ReportList() {
         </thead>
         <tbody>
           {reportList.length === 0 ? (
-            <p>Loading...</p>
+            <tr>
+              <td>
+                <p>Loading...</p>
+              </td>
+            </tr>
           ) : (
             reportList.map((report) => (
               <tr key={report.id}>
-                <td>{report.title}</td>
+                <td>
+                  <Link to={"/raport/" + report.id} state={{ ...report }}>
+                    {report.title}
+                  </Link>
+                </td>
                 <td>{report.email}</td>
                 <td>{report.date}</td>
               </tr>
