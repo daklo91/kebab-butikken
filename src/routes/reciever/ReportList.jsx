@@ -36,13 +36,17 @@ function ReportList() {
           </tr>
         </thead>
         <tbody>
-          {reportList.map((report) => (
-            <tr key={report.id}>
-              <td>{report.title}</td>
-              <td>{report.email}</td>
-              <td>{report.date}</td>
-            </tr>
-          ))}
+          {reportList.length === 0 ? (
+            <p>Loading...</p>
+          ) : (
+            reportList.map((report) => (
+              <tr key={report.id}>
+                <td>{report.title}</td>
+                <td>{report.email}</td>
+                <td>{report.date}</td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
