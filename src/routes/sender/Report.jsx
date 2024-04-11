@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { addDoc, collection } from "@firebase/firestore";
 import { firestore } from "../../firebase_setup/firebase";
 
@@ -33,28 +33,49 @@ function Report() {
   };
 
   return (
-    <>
-      <div>
-        <form onSubmit={submitReport}>
-          <p>Tittel</p>
-          <input type="text" ref={title} required />
-          <p>Beskrivelse</p>
-          <textarea ref={description} required />
-          <p>Email*</p>
-          <input type="email" ref={email} required />
+    <div className="fade-in-page">
+      <Link className="navigate-back" to="/">
+        <b>&#8249;</b> Tilbake
+      </Link>
+      <h1>Raporter sak</h1>
+      <form onSubmit={submitReport}>
+        <div className="form-control">
           <p>
+            <b>Tilbakemeldings Tittel</b>
+            <br />
+            Legg til en kort og beskrivende tittel
+          </p>
+          <input type="text" ref={title} required />
+        </div>
+        <div className="form-control">
+          <p>
+            <b>Beskrivelse</b>
+            <br />
+            Ta med spesifikke kommentarer om hva som bør forbedres, legges til
+            osv.
+          </p>
+          <textarea rows="6" ref={description} required />
+        </div>
+        <div className="form-control">
+          <p>
+            <b>Email*</b>
+          </p>
+          <input type="email" ref={email} required />
+          <p class="info-text">
             <small>
               *Vi bruker email til å kontakte deg hvis vi trenger hjelp med å
               forstå saken.
             </small>
           </p>
-          <button type="submit">Raporter</button>
-        </form>
-        {error ? (
-          <div style={{ color: "red" }}>Noe gikk galt, prøv igjen!</div>
-        ) : null}
-      </div>
-    </>
+        </div>
+        <button className="primary-button" type="submit">
+          Raporter
+        </button>
+      </form>
+      {error ? (
+        <div style={{ color: "red" }}>Noe gikk galt, prøv igjen!</div>
+      ) : null}
+    </div>
   );
 }
 

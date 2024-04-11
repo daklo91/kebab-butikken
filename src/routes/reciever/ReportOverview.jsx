@@ -9,6 +9,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { firestore } from "../../firebase_setup/firebase";
+import { Link } from "react-router-dom";
 
 async function fetchData(docID) {
   const docRef = doc(firestore, "reports", docID);
@@ -69,55 +70,86 @@ function ReportOverview() {
 
   return (
     <div>
+      <Link className="navigate-back" to="/raport-liste">
+        <b>&#8249;</b> Tilbake
+      </Link>
       {reportState.length == 0 ? (
         <p>Loading...</p>
       ) : (
-        <>
-          <p>{reportState.title}</p>
-          <p>{reportState.description}</p>
-          <p>{reportState.email}</p>
-          <p>{reportState.date}</p>
-          <select
-            value={reportState.priority}
-            onChange={() => updateReport("priority", event.target.value)}
-          >
-            <option value="Lav">Lav</option>
-            <option value="Middels">Middels</option>
-            <option calue="Høy">Høy</option>
-          </select>
-          <select
-            value={reportState.status}
-            onChange={() => updateReport("status", event.target.value)}
-          >
-            <option value="Ikke startet">Ikke startet</option>
-            <option value="Under Arbeid">Under Arbeid</option>
-            <option value="Ferdig">Ferdig</option>
-          </select>
-          <select
-            value={reportState.assigned}
-            onChange={() => updateReport("assigned", event.target.value)}
-          >
-            <option value="Ingen">Ingen</option>
-            <option value="Dennis Bjørneset">Dennis Bjørneset</option>
-            <option value="Bjarte Per">Bjarte Per</option>
-            <option calue="Anjani">Anjani</option>
-            <option calue="Ola Nordmann">Ola Nordmann</option>
-            <option calue="Christian">Christian</option>
-          </select>
+        <div className="fade-in-page">
+          <p className="report-overview-title">{reportState.title}</p>
+          <p className="report-overview-description">
+            {reportState.description}
+          </p>
+          <hr />
+          <div className="report-overview-info-container">
+            <div className="report-overview-info">
+              <div className="report-overview-dropdown-container">
+                <p>Status:</p>
+                <select
+                  value={reportState.status}
+                  onChange={() => updateReport("status", event.target.value)}
+                >
+                  <option value="Ikke startet">Ikke startet</option>
+                  <option value="Under Arbeid">Under Arbeid</option>
+                  <option value="Ferdig">Ferdig</option>
+                </select>
+              </div>
+              <div className="report-overview-dropdown-container">
+                <p>Prioritet:</p>
+                <select
+                  value={reportState.priority}
+                  onChange={() => updateReport("priority", event.target.value)}
+                >
+                  <option value="Lav">Lav</option>
+                  <option value="Middels">Middels</option>
+                  <option calue="Høy">Høy</option>
+                </select>
+              </div>
+              <div className="report-overview-dropdown-container">
+                <p>Tildelt:</p>
+                <select
+                  value={reportState.assigned}
+                  onChange={() => updateReport("assigned", event.target.value)}
+                >
+                  <option value="Ingen">Ingen</option>
+                  <option value="Dennis Bjørneset">Dennis Bjørneset</option>
+                  <option value="Bjarte Per">Bjarte Per</option>
+                  <option calue="Anjani">Anjani</option>
+                  <option calue="Ola Nordmann">Ola Nordmann</option>
+                  <option calue="Christian">Christian</option>
+                </select>
+              </div>
+            </div>
+            <div className="report-overview-info-text-container">
+              <div className="report-overview-info-text">
+                <p>Innmelder: {reportState.email}</p>
+              </div>
+              <div className="report-overview-info-text">
+                <p>Dato: {reportState.date}</p>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <p className="comment-info">Skriv en kommentar:</p>
           <textarea ref={commentRef}></textarea>
-          <button onClick={() => updateReport("comment")}>Kommenter</button>
+          <button
+            className="comment-button"
+            onClick={() => updateReport("comment")}
+          >
+            Kommenter
+          </button>
           {commentState.length == 0 ? (
-            <div>Loading Comments...</div>
+            <div></div>
           ) : (
             commentState.map((comment) => (
-              <div key={comment.id}>
+              <div className="comment-box" key={comment.id}>
                 <div>{comment.comment}</div>
-                <div>{comment.date}</div>
+                <div className="comment-date">{comment.date}</div>
               </div>
             ))
           )}
-          <div></div>
-        </>
+        </div>
       )}
     </div>
   );

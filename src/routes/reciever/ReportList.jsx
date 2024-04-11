@@ -8,7 +8,6 @@ async function fetchDataFromFirestore() {
   const querySnapshot = await getDocs(ref);
 
   const data = [];
-  console.log(querySnapshot);
   querySnapshot.forEach((doc) => {
     data.push({ id: doc.id, ...doc.data() });
   });
@@ -21,37 +20,45 @@ function ReportList() {
   useEffect(() => {
     async function fetchData() {
       const data = await fetchDataFromFirestore();
+      data.sort((b, a) => new Date(a.date) - new Date(b.date));
       setReportList(data);
     }
     fetchData();
   }, []);
 
   return (
-    <div>
-      <p>ReportList</p>
+    <div className="fade-in-page">
+      <Link className="navigate-back" to="/">
+        <b>&#8249;</b> Tilbake
+      </Link>
+      <h1>Saksliste</h1>
       <table>
         <thead>
           <tr>
             <th>Tittel</th>
-            <th>Innmelder</th>
+            <th className="hide-on-mobile">Innmelder</th>
             <th>Dato</th>
           </tr>
         </thead>
         <tbody>
           {reportList.length === 0 ? (
             <tr>
-              <td>
-                <p>Loading...</p>
+              <td colSpan={3}>
+                <div class="spinner-box">
+                  <span class="material spinner" />
+                </div>
               </td>
             </tr>
           ) : (
             reportList.map((report) => (
-              <tr key={report.id}>
+              <tr className="report-list-row" key={report.id}>
                 <td>
-                  <Link to={"/raport/" + report.id}>{report.title}</Link>
+                  <b>
+                    <Link to={"/raport/" + report.id}>{report.title}</Link>
+                  </b>
                 </td>
-                <td>{report.email}</td>
-                <td>{report.date}</td>
+                <td className="hide-on-mobile">{report.email}</td>
+                <td>{report.date.split(", ")[0]}</td>
               </tr>
             ))
           )}
