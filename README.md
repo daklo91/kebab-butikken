@@ -52,7 +52,7 @@ Then there are two folders where the idea is that the reciever folder handles al
 
 ## More about ReportOverview
 
-It uses the updateRport function which takes in two arguments. One is for the key of the object/field that is to be updated and the other is the variable to update it with.<br>
+It uses the updateReport function which takes in two arguments. One is for the key of the data/field that is to be updated and the other is the variable to update it with.<br>
 Whenever this is updated, the data of the whole document will be refetched and rerendered to make sure that the end-user sees that it was succesful (because I did not include any error messages).
 
 ## Improvements
