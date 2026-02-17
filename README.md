@@ -2,6 +2,8 @@
 
 This project is a webpage that is able to recieve issues from customers which then can be read and handled by employees.
 
+Live site: https://kebab-buttiken.netlify.app/
+
 ### This project uses:
 
 - React installed with Vite
